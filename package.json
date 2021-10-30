@@ -1,0 +1,21 @@
+{
+  "name": "kanedama",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MansaGroup/kanedama.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MansaGroup/kanedama/issues"
+  },
+  "homepage": "https://github.com/MansaGroup/kanedama#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "prettier": "2.4.1"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
