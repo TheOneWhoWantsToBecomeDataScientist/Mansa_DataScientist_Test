@@ -4,6 +4,8 @@ from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel, validator
 
+import pandas as pd
+import Account_synthesis as Acc
 
 class Account(BaseModel):
     update_date: date
@@ -52,7 +54,20 @@ class ResponsePredict(BaseModel):
 def predict(
     transactions: List[Transaction], account: Account
 ) -> float:
-    raise NotImplementedError()
+
+    #Convert transactions and account to Pandas DataFrame
+    account_df = pd.DataFrame(data={'update_date': [account.update_date],'balance': [account.balance]})
+    account_df.loc[:,'update_date'] = pd.to_datetime(account_df.update_date,format="%Y-%m-%d")
+    transactions_df = pd.DataFrame(map(dict,transactions))
+    transactions_df.loc[:,'date'] = pd.to_datetime(transactions_df.date,format="%Y-%m-%d")
+
+    #Compute account synthesis
+    User_Account = Acc.Account_synthesis(account_df,transactions_df)
+    
+    #Predict next monthly outgoing
+    next_monthly_outgoing = User_Account.predict_next_monthly_outgoing("Linear model based on studied account ; Extrapolate outgoing")
+    
+    return next_monthly_outgoing
 
 
 app = FastAPI()
@@ -65,7 +80,7 @@ async def root(predict_body: RequestPredict):
 
     # Call your prediction function/code here
     ####################################################
-    #predicted_amount = predict(transactions, account)
+    predicted_amount = predict(transactions, account)
 
     # Return predicted amount
-    return {"predicted_amount": 0}
+    return {"predicted_amount": predicted_amount}

@@ -1,0 +1,12 @@
+python=3.7
+numpy
+pandas
+matplotlib
+ipython
+jupyter
+scikit-learn
+fastapi==0.70.0
+pydantic==1.8.2
+requests
+uvicorn
+black

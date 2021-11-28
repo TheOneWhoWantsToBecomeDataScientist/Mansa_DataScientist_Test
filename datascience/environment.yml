@@ -1,0 +1,17 @@
+name: DataScientist
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - conda-forge::numpy
+  - conda-forge::pandas
+  - conda-forge::matplotlib
+  - conda-forge::ipython
+  - conda-forge::jupyter
+  - conda-forge::scikit-learn
+  - pydantic==1.8.2
+  - fastapi==0.70.0
+  - requests
+  - uvicorn
+  - black
+prefix: C:\Anaconda3\envs\DataScientist
